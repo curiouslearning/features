@@ -1,14 +1,26 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.5
+  node: circleci/node@7.0.0
 jobs:
-  release:
+  build:
     executor: node/default
     steps:
       - checkout
-      - node/install-packages # Install and automatically cache packages
-      # Run optional required steps before releasing
-      # - run: npm run build-script
+      - run: sudo npm install -g npm@latest
+      - node/install-packages:
+          cache-path: ~/project/node_modules
+          override-ci-command: npm install
+      - run: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+          
+  publish:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: ~/project
       - run: npx semantic-release
 
 workflows:
@@ -16,11 +28,11 @@ workflows:
     # Run the test jobs first, then the release only when all the test jobs are successful
     jobs:
       - node/test
-      - node/build
-      - release:
+      - build
+      - publish:
           requires:
             - node/test
-            - node/build
+            - build
           filters:
             branches:
               only:
