@@ -1,1 +1,1 @@
-export const test = () => console.log('hello')
+export * from './services/feature-flag/feature-flag-service';

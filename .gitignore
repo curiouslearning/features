@@ -1,3 +1,7 @@
+# Generated folders
 node_modules
 dist
 coverage
+
+# Local configuration
+.npmrc

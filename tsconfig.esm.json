@@ -3,6 +3,7 @@
         "target": "esnext",
         "lib": ["esnext", "dom"],
         "module": "esnext",
+        "moduleResolution": "node",
         "outDir": "./dist/esm",
         "rootDir": "./src/",
         "esModuleInterop": true,
@@ -11,5 +12,8 @@
       // ...
     },
     "include": ["src/index.ts"],
-    "exclude": ["node_modules"]
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
   }
