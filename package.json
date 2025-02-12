@@ -1,0 +1,25 @@
+{
+  "name": "@curiouslearning/features",
+  "version": "1.0.0",
+  "description": "A wrapper for feature flags and experiments.",
+  "main": "dist/esm/index.js",
+  "type": "module",
+  "exports": {
+    "import": "./dist/esm/index.js"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"TODO: no test specified\"",
+    "build": "npm run build:esm",
+    "build:esm": "tsc -p tsconfig.esm.json"
+  },
+  "author": "curiouslearning",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

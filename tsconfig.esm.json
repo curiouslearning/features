@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["esnext", "dom"],
+        "module": "esnext",
+        "outDir": "./dist/esm",
+        "rootDir": "./src/",
+        "esModuleInterop": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true
+      // ...
+    },
+    "include": ["src/index.ts"],
+    "exclude": ["node_modules"]
+  }
