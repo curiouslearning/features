@@ -15,7 +15,9 @@ workflows:
   test_and_release:
     # Run the test jobs first, then the release only when all the test jobs are successful
     jobs:
+      - node/test
       - node/build
       - release:
           requires:
+            - node/test
             - node/build

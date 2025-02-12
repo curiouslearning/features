@@ -12,13 +12,18 @@
     "dist"
   ],
   "scripts": {
-    "test": "echo \"TODO: no test specified\"",
     "build": "npm run build:esm",
-    "build:esm": "tsc -p tsconfig.esm.json"
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "test": "jest",
+    "test:local": "jest --collectCoverage=false"
   },
   "author": "curiouslearning",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
