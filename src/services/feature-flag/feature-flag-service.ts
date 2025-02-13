@@ -4,6 +4,9 @@ import { LocalStorageCache } from '../../utils/storage/local-storage';
 // TODO: move this to env variable
 const STATSIG_CLIENT_KEY = 'client-SSmY5k5Cs39G7II74NdWqPfv5hQzrFiUqCc3C1IU9na';
 
+export interface FeatureFlagsServiceOptions {
+  metaData?: any;
+}
 /**
  * Singleton wrapper class for statsig.
  */
@@ -12,10 +15,10 @@ export class FeatureFlagsService {
   private storage = new LocalStorageCache('CRFeatureFlags');
   private statsigClient: StatsigClient;
 
-  constructor(public metaData) {
+  constructor(public options: FeatureFlagsServiceOptions) {
     if (FeatureFlagsService.instance) return FeatureFlagsService.instance;
 
-    this.statsigClient = new StatsigClient(STATSIG_CLIENT_KEY, { userID: metaData?.userId || null });
+    this.statsigClient = new StatsigClient(STATSIG_CLIENT_KEY, { userID: options?.metaData?.userId || null });
 
     FeatureFlagsService.instance = this;
   }

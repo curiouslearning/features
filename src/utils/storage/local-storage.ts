@@ -43,7 +43,7 @@ export class LocalStorageCache {
       return JSON.parse(value);
     }
   
-    private save(data) {
+    private save(data: any) {
       localStorage.setItem(this.namespace, this.serialize(data));
     }
   }
