@@ -13,7 +13,7 @@
         "declarationMap": true
       // ...
     },
-    "include": ["src/index.ts"],
+    "include": ["src/**/*", "package.json"],
     "exclude": [
       "node_modules",
       "**/*.spec.ts"
