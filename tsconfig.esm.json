@@ -8,7 +8,9 @@
         "rootDir": "./src/",
         "esModuleInterop": true,
         "noUnusedParameters": true,
-        "noImplicitReturns": true
+        "noImplicitReturns": true,
+        "declaration": true,
+        "declarationMap": true
       // ...
     },
     "include": ["src/index.ts"],
