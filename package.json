@@ -2,8 +2,8 @@
   "name": "@curiouslearning/features",
   "version": "1.0.0",
   "description": "A wrapper for feature flags and experiments.",
-  "main": "./dist/esm/index.js",
-  "exports": "./dist/esm/index.js",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
   "files": [
     "README.md",
