@@ -1,5 +1,6 @@
 const TerserPlugin = require("terser-webpack-plugin");
-const path = require('path')
+const path = require('path');
+const { library } = require("webpack");
 
 module.exports = {
     entry: {
@@ -18,7 +19,10 @@ module.exports = {
     output: {
         chunkFilename: '[name].js',
         filename: '[name].js',
-        clean: true
+        clean: true,
+        library: {
+            type: 'umd'
+        }
     },
 
     mode: 'development',
