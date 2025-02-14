@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "A wrapper for feature flags and experiments.",
   "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./dist/index.d.ts": "./dist/index.d.ts"
+  },
   "files": [
     "README.md",
     "dist"
