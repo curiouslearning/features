@@ -22,6 +22,6 @@ module.exports = {
     },
 
     mode: 'development',
-    plugins: [new TerserPlugin()],
+    // plugins: [new TerserPlugin()],
     devtool: 'source-map'
 }
