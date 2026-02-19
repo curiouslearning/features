@@ -34,8 +34,6 @@ export class FeatureFlagsService {
       this.statsigClient = new StatsigClient(STATSIG_CLIENT_KEY, resolvedUser as any);
       return;
     }
-
-    void this.updateUser(resolvedUser);
   }
 
   /**
@@ -116,22 +114,6 @@ export class FeatureFlagsService {
       if (this.storage.isSet(cacheKey)) return this.storage.get(cacheKey) as Record<string, unknown>;
       return {};
     }
-  }
-
-  /**
-   * Updates the Statsig user without recreating the client when supported.
-   * @param user User object with IDs and custom attributes.
-   * @returns A promise that resolves after the user update call finishes.
-   */
-  async updateUser(user: FeatureFlagsUser) {
-    this.user = user;
-
-    if (!this.statsigClient) {
-      this.statsigClient = new StatsigClient(STATSIG_CLIENT_KEY, user as any);
-      return;
-    }
-
-    await (this.statsigClient as any).updateUser(user);
   }
 
   /**
