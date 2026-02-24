@@ -8,8 +8,9 @@ export class LocalStorageCache {
       localStorage.removeItem(this.namespace)
     }
   
-    get(key: string) {
-      return this.getStorage()[key];
+    get(key: string, allowExpired = false) {
+      const entry = this.getEntry(key, allowExpired);
+      return entry ? entry.__value : undefined;
     }
   
     remove(key: string) {
@@ -19,13 +20,14 @@ export class LocalStorageCache {
       this.save(data);
     }
   
-    isSet(key: string) {
-      return this.getStorage()[key] !== undefined;
+    isSet(key: string, allowExpired = false) {
+      return this.getEntry(key, allowExpired) !== undefined;
     }
 
-    set(key: string, value: any) {
+    set(key: string, value: any, ttlMs?: number) {
       const data = this.getStorage();
-      data[key] = value;
+      const expiresAt = typeof ttlMs === 'number' ? Date.now() + ttlMs : undefined;
+      data[key] = this.wrapEntry(value, expiresAt);
       this.save(data);
     }
   
@@ -33,6 +35,33 @@ export class LocalStorageCache {
       const storage = localStorage.getItem(this.namespace);
       if (storage) return this.deserialize(storage);
       return {};
+    }
+
+    private getEntry(key: string, allowExpired = false) {
+      const data = this.getStorage();
+      const raw = data[key];
+      if (raw === undefined) return undefined;
+
+      const entry = this.unwrapEntry(raw);
+      if (!entry.__expiresAt || entry.__expiresAt > Date.now()) return entry;
+
+      if (allowExpired) return entry;
+      return undefined;
+    }
+
+    private wrapEntry(value: any, expiresAt?: number) {
+      return {
+        __value: value,
+        __expiresAt: expiresAt,
+      };
+    }
+
+    private unwrapEntry(value: any) {
+      if (value && typeof value === 'object' && '__value' in value) {
+        return value as { __value: any; __expiresAt?: number };
+      }
+
+      return { __value: value };
     }
   
     private serialize(value: any) {
