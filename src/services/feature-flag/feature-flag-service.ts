@@ -78,7 +78,7 @@ export class FeatureFlagsService {
       this.setCacheIfAllowed(cacheKey, isEnabled);
       return isEnabled;
     } catch (e) {
-      if (useCache && this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true) as boolean;
+      if (this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true) as boolean;
       return false;
     }
   }
@@ -101,7 +101,7 @@ export class FeatureFlagsService {
       this.setCacheIfAllowed(cacheKey, values);
       return values;
     } catch (e) {
-      if (useCache && this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true);
+      if (this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true);
       return properties.map((): unknown => undefined);
     }
   }
@@ -122,7 +122,7 @@ export class FeatureFlagsService {
       this.setCacheIfAllowed(cacheKey, value);
       return value;
     } catch (e) {
-      if (useCache && this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true) as Record<string, unknown>;
+      if (this.storage.isSet(cacheKey, true)) return this.storage.get(cacheKey, true) as Record<string, unknown>;
       return {};
     }
   }
